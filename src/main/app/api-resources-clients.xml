@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:bpm="http://www.mulesoft.org/schema/mule/bpm" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:oauth2-provider="http://www.mulesoft.org/schema/mule/oauth2-provider" xmlns:signature="http://www.mulesoft.org/schema/mule/signature" xmlns:secure-property-placeholder="http://www.mulesoft.org/schema/mule/secure-property-placeholder" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.4.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/oauth2-provider http://www.mulesoft.org/schema/mule/oauth2-provider/1.0/mule-oauth2-provider.xsd
+http://www.mulesoft.org/schema/mule/signature http://www.mulesoft.org/schema/mule/signature/1.0/mule-signature.xsd
+http://www.mulesoft.org/schema/mule/secure-property-placeholder http://www.mulesoft.org/schema/mule/secure-property-placeholder/1.0/mule-secure-property-placeholder.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+http://www.mulesoft.org/schema/mule/bpm http://www.mulesoft.org/schema/mule/bpm/current/mule-bpm.xsd">
+	<jdbc-ee:mysql-data-source name="MySQL_Data_Source" user="root" password="" url="jdbc:mysql://localhost:3306/test" transactionIsolation="UNSPECIFIED" doc:name="MySQL Data Source" />
+	<jdbc-ee:connector name="Database" dataSource-ref="MySQL_Data_Source" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="Database" />
+	<bpm:drools></bpm:drools>
+	<spring:beans>
+		<spring:bean id="property-placeholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<spring:property name="location" value="classpath:config.properties" />
+		</spring:bean>
+	</spring:beans>
+	<configuration doc:name="Configuration">
+		<expression-language autoResolveVariables="true">
+			<import name="helper" class="com.mulesoft.se.poc.telephony.Helper" />
+
+		</expression-language>
+	</configuration>
+
+	<flow name="buscaClientes" doc:name="buscaClientes">
+		<logger level="INFO" doc:name="Logger" />
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+			<jdbc-ee:query key="select" value="select c.id, c.name from telephony.clientes c" />
+		</jdbc-ee:outbound-endpoint>
+	</flow>
+	<flow name="crearCliente" doc:name="crearCliente">
+		<logger level="INFO" doc:name="Logger" />
+	</flow>
+	<flow name="modificaCliente" doc:name="modificaCliente">
+		<logger level="INFO" doc:name="Logger" />
+	</flow>
+	<flow name="buscaCliente" doc:name="buscaCliente">
+		<logger level="INFO" doc:name="Logger" />
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+			<jdbc-ee:query key="select" value="select c.id, c.name from telephony.clientes c where c.id = #[cliente]" />
+		</jdbc-ee:outbound-endpoint>
+		<set-payload value="#[payload[0]]" doc:name="Set Payload"/>
+	</flow>
+	<flow name="buscaClientePlanes" doc:name="buscaClientePlanes">
+		<logger level="INFO" doc:name="Logger" />
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+			<jdbc-ee:query key="select" value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name from telephony.plans p, telephony.clientes c, telephony.cliente_plans cp where p.id = cp.plan_id and c.id = cp.cliente_id and c.id =  #[cliente]" />
+		</jdbc-ee:outbound-endpoint>
+	</flow>
+	<flow name="buscaClientePlan" doc:name="buscaClientePlan">
+		<logger level="INFO" doc:name="Logger" />
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+			<jdbc-ee:query key="select" value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name from telephony.plans p where p.id = #[cliente]" />
+		</jdbc-ee:outbound-endpoint>
+		<set-payload value="#[payload[0]]" doc:name="Set Payload"/>
+	</flow>
+	<flow name="modificaClientePlan" doc:name="modificaClientePlan">
+		<logger level="INFO" doc:name="Logger" />
+	</flow>
+	<flow name="buscaClienteFactura" doc:name="buscaClienteFactura">
+		<logger level="INFO" doc:name="Logger" />
+		
+	</flow>
+	<flow name="buscaClienteOpciones" doc:name="buscaClienteOpciones">
+		<logger level="INFO" doc:name="Logger" />
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+			<jdbc-ee:query key="select" value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name as billing from telephony.plans p, telephony.billings b where not p.id in (select p.id from telephony.plans p, telephony.clientes c, telephony.cliente_plans cp where p.id = cp.plan_id and c.id = cp.cliente_id and c.id = #[cliente]) and b.id = p.billing_id" />
+		</jdbc-ee:outbound-endpoint>
+	</flow>
+	<flow name="upgradeCliente" doc:name="upgradeCliente">
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Select Call History Records &gt; 177" queryKey="select">
+			<jdbc-ee:query key="select" value="select count(*) as count from call_history where datediff(curdate(), date) > 177" />
+		</jdbc-ee:outbound-endpoint>
+        <set-payload value="#[payload[0]]" doc:name="First record"/>
+        <expression-filter expression="#[payload &gt; 0]" doc:name="payload &gt; 0"/>
+        <flow-ref name="" doc:name="Invocar Asociaci&#243;n Paname&#241;a de Cr&#233;dito"/>
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Select Credit Check Flag" queryKey="select">
+			<jdbc-ee:query key="select" value="select cc.flag from telephony.credit_check cc where cc.cliente_id = #[cliente]" />
+		</jdbc-ee:outbound-endpoint>
+        <choice doc:name="Choice">
+            <when expression="#[payload[0].flag = 'RED']">
+                <logger level="INFO" doc:name="Logger"/>
+            </when>
+            <when expression="#[payload[0].flag = 'GREEN']">
+                <logger level="INFO" doc:name="Logger"/>
+            </when>
+            <otherwise >
+                <logger level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
+	</flow>
+    <flow name="invocar-apc" doc:name="invocar-apc"/>
+
+</mule>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="api-plans">
+    <global-unknown index="1" parentIndex="0" unknownName="plansInterface" description="false" wrapNSURL="http://www.mulesoft.org/schema/mule/api-rest" wrapNSPref="" wrapIn="api" entity-id="global-unknown#1">
+        <content>&lt;interface xmlns=&quot;http://www.mulesoft.org/schema/mule/api-rest&quot; xmlns:ee=&quot;http://www.mulesoft.org/schema/mule/ee/core&quot; name=&quot;plansInterface&quot; description=&quot;Interface Spec&quot;&gt;
+		&lt;collection-resource name=&quot;planes&quot; description=&quot;Plan de oferta&quot;&gt;
+			&lt;retrieve flow-ref=&quot;buscaPlanes&quot; description=&quot;Busca los Planes&quot;&gt;
+				&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+				&lt;parameters&gt;
+					&lt;query-parameter name=&quot;billing&quot; required=&quot;true&quot;&gt;&lt;/query-parameter&gt;
+				&lt;/parameters&gt;
+			&lt;/retrieve&gt;
+			&lt;member idVariableName=&quot;plan&quot;&gt;
+				&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+				&lt;retrieve flow-ref=&quot;buscaPlan&quot; description=&quot;Busca los Planes Post-pago&quot;&gt;
+					&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+				&lt;/retrieve&gt;
+			&lt;/member&gt;
+		&lt;/collection-resource&gt;
+		&lt;collection-resource name=&quot;fabricantes&quot; description=&quot;Celulares en venta&quot;&gt;
+			&lt;retrieve flow-ref=&quot;buscaFabricantes&quot; description=&quot;Busca los equipos pertenecientes a un Fabricante&quot;&gt;
+				&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+			&lt;/retrieve&gt;
+			&lt;member idVariableName=&quot;fabricante&quot;&gt;
+				&lt;collection-resource name=&quot;equipos&quot; description=&quot;Fabricantes de Celulares en venta&quot;&gt;
+					&lt;retrieve flow-ref=&quot;buscaFabricanteEquipos&quot; description=&quot;Busca los equipos pertenecientes a un Fabricante&quot;&gt;
+						&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+					&lt;/retrieve&gt;
+					&lt;member idVariableName=&quot;equipo&quot;&gt;
+						&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+						&lt;retrieve flow-ref=&quot;buscaFabricanteEquipo&quot; description=&quot;Busca los datos de un Equipo&quot;&gt;&lt;/retrieve&gt;
+					&lt;/member&gt;
+				&lt;/collection-resource&gt;
+			&lt;/member&gt;
+		&lt;/collection-resource&gt;
+	&lt;/interface&gt;</content>
+    </global-unknown>
+    <global-unknown index="21" parentIndex="0" unknownName="plansService" description="false" wrapNSURL="http://www.mulesoft.org/schema/mule/api-rest" wrapNSPref="" wrapIn="api" entity-id="global-unknown#2">
+        <content>&lt;service xmlns=&quot;http://www.mulesoft.org/schema/mule/api-rest&quot; xmlns:ee=&quot;http://www.mulesoft.org/schema/mule/ee/core&quot; name=&quot;plansService&quot; interface-ref=&quot;plansInterface&quot; description=&quot;service description&quot;&gt;
+		&lt;mule:inbound-endpoint xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; address=&quot;http://localhost:${http.port}/api/misc&quot;&gt;&lt;/mule:inbound-endpoint&gt;
+		&lt;swagger-documentation enableConsole=&quot;true&quot; consolePath=&quot;console&quot;&gt;&lt;/swagger-documentation&gt;
+	&lt;/service&gt;</content>
+    </global-unknown>
+    <description></description>
+</mule-configuration>

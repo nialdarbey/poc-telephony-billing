@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="api-clientes">
+    <global-unknown index="1" parentIndex="0" unknownName="clientInterface" description="false" wrapNSURL="http://www.mulesoft.org/schema/mule/api-rest" wrapNSPref="" wrapIn="api" entity-id="global-unknown#1">
+        <content>&lt;interface xmlns=&quot;http://www.mulesoft.org/schema/mule/api-rest&quot; xmlns:ee=&quot;http://www.mulesoft.org/schema/mule/ee/core&quot; name=&quot;clientInterface&quot; description=&quot;Interface Spec&quot;&gt;
+		&lt;collection-resource name=&quot;clientes&quot; description=&quot;Clientes registrados&quot;&gt;
+			&lt;retrieve flow-ref=&quot;buscaClientes&quot; description=&quot;Busca una lista de Clientes&quot;&gt;
+				&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+			&lt;/retrieve&gt;
+			&lt;member idVariableName=&quot;cliente&quot;&gt;
+				&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+				&lt;create flow-ref=&quot;crearCliente&quot; description=&quot;Busca los datos de un Cliente&quot;&gt;&lt;/create&gt;
+				&lt;retrieve flow-ref=&quot;buscaCliente&quot; description=&quot;Busca los datos de un Cliente&quot;&gt;&lt;/retrieve&gt;
+				&lt;update flow-ref=&quot;modificaCliente&quot; description=&quot;Modifica los datos de un Cliente&quot;&gt;&lt;/update&gt;
+				&lt;collection-resource name=&quot;planes&quot; description=&quot;Planes del Cliente&quot;&gt;
+					&lt;retrieve flow-ref=&quot;buscaClientePlanes&quot; description=&quot;Busca los datos de los Planes del Cliente&quot;&gt;
+						&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+					&lt;/retrieve&gt;
+					&lt;member idVariableName=&quot;plan&quot;&gt;
+						&lt;retrieve flow-ref=&quot;buscaClientePlan&quot; description=&quot;Busca los datos del Plan de Cliente&quot;&gt;
+							&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+						&lt;/retrieve&gt;
+					&lt;/member&gt;
+				&lt;/collection-resource&gt;
+				&lt;collection-resource name=&quot;opciones&quot; description=&quot;Upgrade Opciones&quot;&gt;
+					&lt;retrieve flow-ref=&quot;buscaClienteOpciones&quot; description=&quot;Busca una lista de Opciones&quot;&gt;
+						&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+					&lt;/retrieve&gt;
+					&lt;member idVariableName=&quot;opcion&quot;&gt;
+						&lt;collection-resource name=&quot;upgrade&quot; description=&quot;Plan upgrade&quot;&gt;
+							&lt;member&gt;
+								&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+								&lt;create flow-ref=&quot;upgradeCliente&quot; description=&quot;Cambiar Plan del Cliente para algo superior&quot;&gt;&lt;/create&gt;
+							&lt;/member&gt;
+						&lt;/collection-resource&gt;
+					&lt;/member&gt;
+				&lt;/collection-resource&gt;
+				&lt;document-resource name=&quot;factura&quot; description=&quot;Busca factura del Cliente&quot;&gt;
+					&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
+					&lt;retrieve flow-ref=&quot;buscaClienteFactura&quot; description=&quot;Busca los datos de la factura del Cliente&quot;&gt;
+					&lt;/retrieve&gt;
+				&lt;/document-resource&gt;
+			&lt;/member&gt;
+		&lt;/collection-resource&gt;
+	&lt;/interface&gt;</content>
+    </global-unknown>
+    <global-unknown index="27" parentIndex="0" unknownName="clientService" description="false" wrapNSURL="http://www.mulesoft.org/schema/mule/api-rest" wrapNSPref="" wrapIn="api" entity-id="global-unknown#2">
+        <content>&lt;service xmlns=&quot;http://www.mulesoft.org/schema/mule/api-rest&quot; xmlns:ee=&quot;http://www.mulesoft.org/schema/mule/ee/core&quot; name=&quot;clientService&quot; interface-ref=&quot;clientInterface&quot; description=&quot;service description&quot;&gt;
+		&lt;mule:inbound-endpoint xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; address=&quot;http://localhost:${http.port}/api/customers&quot;&gt;&lt;/mule:inbound-endpoint&gt;
+		&lt;swagger-documentation enableConsole=&quot;true&quot; consolePath=&quot;console&quot;&gt;&lt;/swagger-documentation&gt;
+	&lt;/service&gt;</content>
+    </global-unknown>
+    <description></description>
+</mule-configuration>

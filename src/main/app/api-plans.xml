@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api xmlns="http://www.mulesoft.org/schema/mule/api-rest" xmlns:mule="http://www.mulesoft.org/schema/mule/core" xmlns:rest="http://www.mulesoft.org/schema/mule/api-rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rss="http://www.mulesoft.org/schema/mule/api" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xsi:schemaLocation="
+       http://www.mulesoft.org/schema/mule/api http://www.mulesoft.org/schema/mule/api/current/mule-api.xsd
+       http://www.mulesoft.org/schema/mule/api-rest http://www.mulesoft.org/schema/mule/api-rest/current/mule-api-rest.xsd
+       http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+       http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+
+	<interface xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" name="plansInterface" description="Interface Spec">
+		<collection-resource name="planes" description="Plan de oferta">
+			<retrieve flow-ref="buscaPlanes" description="Busca los Planes">
+				<representation mediaType="application/json" quality="1.0" />
+				<parameters>
+					<query-parameter name="billing" required="true" />
+				</parameters>
+			</retrieve>
+			<member idVariableName="plan">
+				<representation mediaType="application/json" quality="1.0" />
+				<retrieve flow-ref="buscaPlan" description="Busca los Planes Post-pago">
+					<representation mediaType="application/json" quality="1.0" />
+				</retrieve>
+			</member>
+		</collection-resource>
+		<collection-resource name="fabricantes" description="Celulares en venta">
+			<retrieve flow-ref="buscaFabricantes" description="Busca los equipos pertenecientes a un Fabricante">
+				<representation mediaType="application/json" quality="1.0" />
+			</retrieve>
+			<member idVariableName="fabricante">
+				<collection-resource name="equipos" description="Fabricantes de Celulares en venta">
+					<retrieve flow-ref="buscaFabricanteEquipos" description="Busca los equipos pertenecientes a un Fabricante">
+						<representation mediaType="application/json" quality="1.0" />
+					</retrieve>
+					<member idVariableName="equipo">
+						<representation mediaType="application/json" quality="1.0" />
+						<retrieve flow-ref="buscaFabricanteEquipo" description="Busca los datos de un Equipo" />
+					</member>
+				</collection-resource>
+			</member>
+		</collection-resource>
+	</interface>
+	<service xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" name="plansService" interface-ref="plansInterface" description="service description">
+		<mule:inbound-endpoint xmlns:mule="http://www.mulesoft.org/schema/mule/core" address="http://localhost:${http.port}/api/misc"></mule:inbound-endpoint>
+		<swagger-documentation enableConsole="true" consolePath="console" />
+	</service>
+</api>

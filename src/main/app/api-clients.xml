@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api xmlns="http://www.mulesoft.org/schema/mule/api-rest" xmlns:mule="http://www.mulesoft.org/schema/mule/core" xmlns:rest="http://www.mulesoft.org/schema/mule/api-rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rss="http://www.mulesoft.org/schema/mule/api" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xsi:schemaLocation="
+       http://www.mulesoft.org/schema/mule/api http://www.mulesoft.org/schema/mule/api/current/mule-api.xsd
+       http://www.mulesoft.org/schema/mule/api-rest http://www.mulesoft.org/schema/mule/api-rest/current/mule-api-rest.xsd
+       http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+       http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+
+	<interface xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" name="clientInterface" description="Interface Spec">
+		<collection-resource name="clientes" description="Clientes registrados">
+			<retrieve flow-ref="buscaClientes" description="Busca una lista de Clientes">
+				<representation mediaType="application/json" quality="1.0" />
+			</retrieve>
+			<member idVariableName="cliente">
+				<representation mediaType="application/json" quality="1.0" />
+				<create flow-ref="crearCliente" description="Busca los datos de un Cliente" />
+				<retrieve flow-ref="buscaCliente" description="Busca los datos de un Cliente" />
+				<update flow-ref="modificaCliente" description="Modifica los datos de un Cliente" />
+				<collection-resource name="planes" description="Planes del Cliente">
+					<retrieve flow-ref="buscaClientePlanes" description="Busca los datos de los Planes del Cliente">
+						<representation mediaType="application/json" quality="1.0" />
+					</retrieve>
+					<member idVariableName="plan">
+						<retrieve flow-ref="buscaClientePlan" description="Busca los datos del Plan de Cliente">
+							<representation mediaType="application/json" quality="1.0" />
+						</retrieve>
+					</member>
+				</collection-resource>
+				<collection-resource name="opciones" description="Upgrade Opciones">
+					<retrieve flow-ref="buscaClienteOpciones" description="Busca una lista de Opciones">
+						<representation mediaType="application/json" quality="1.0" />
+					</retrieve>
+					<member idVariableName="opcion">
+						<collection-resource name="upgrade" description="Plan upgrade">
+							<member>
+								<representation mediaType="application/json" quality="1.0" />
+								<create flow-ref="upgradeCliente" description="Cambiar Plan del Cliente para algo superior" />
+							</member>
+						</collection-resource>
+					</member>
+				</collection-resource>
+				<document-resource name="factura" description="Busca factura del Cliente">
+					<representation mediaType="application/json" quality="1.0" />
+					<retrieve flow-ref="buscaClienteFactura" description="Busca los datos de la factura del Cliente">
+					</retrieve>
+				</document-resource>
+			</member>
+		</collection-resource>
+	</interface>
+	<service xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" name="clientService" interface-ref="clientInterface" description="service description">
+		<mule:inbound-endpoint xmlns:mule="http://www.mulesoft.org/schema/mule/core" address="http://localhost:${http.port}/api/customers"></mule:inbound-endpoint>
+		<swagger-documentation enableConsole="true" consolePath="console" />
+	</service>
+</api>
