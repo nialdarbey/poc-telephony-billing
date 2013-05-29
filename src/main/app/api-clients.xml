@@ -21,9 +21,9 @@
 						<representation mediaType="application/json" quality="1.0" />
 					</retrieve>
 					<member idVariableName="plan">
-						<retrieve flow-ref="buscaClientePlan" description="Busca los datos del Plan de Cliente">
 							<representation mediaType="application/json" quality="1.0" />
-						</retrieve>
+						<retrieve flow-ref="buscaClientePlan" description="Busca los datos del Plan de Cliente" />
+						<delete flow-ref="borraClientePlan" description="Borra el Plan de Cliente" />
 					</member>
 				</collection-resource>
 				<collection-resource name="opciones" description="Upgrade Opciones">
@@ -48,7 +48,7 @@
 		</collection-resource>
 	</interface>
 	<service xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" name="clientService" interface-ref="clientInterface" description="service description">
-		<mule:inbound-endpoint xmlns:mule="http://www.mulesoft.org/schema/mule/core" address="http://localhost:${http.port}/api/customers"></mule:inbound-endpoint>
+		<mule:inbound-endpoint xmlns:mule="http://www.mulesoft.org/schema/mule/core" address="http://localhost:${http.port}/customer/api"></mule:inbound-endpoint>
 		<swagger-documentation enableConsole="true" consolePath="console" />
 	</service>
 </api>

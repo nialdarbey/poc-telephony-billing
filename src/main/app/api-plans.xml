@@ -39,7 +39,7 @@
 		</collection-resource>
 	</interface>
 	<service xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" name="plansService" interface-ref="plansInterface" description="service description">
-		<mule:inbound-endpoint xmlns:mule="http://www.mulesoft.org/schema/mule/core" address="http://localhost:${http.port}/api/misc"></mule:inbound-endpoint>
+		<mule:inbound-endpoint xmlns:mule="http://www.mulesoft.org/schema/mule/core" address="http://localhost:${http.port}/ui/api"></mule:inbound-endpoint>
 		<swagger-documentation enableConsole="true" consolePath="console" />
 	</service>
 </api>

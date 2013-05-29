@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="mock">
+    <flow SubFlow="false" name="APCService" entity-id="fde1a6d0-bc82-4911-b46e-426fddf1982f">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property value="1" name="auxiliary;index"/>
+            <property name="tracking:enable-default-events"/>
+        </properties>
+        <description>Asociación Panameña de Crédito</description>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#1">
+            <graphicalData height="0" width="0" y="0" x="0"/>
+            <endpoint message-exchange-pattern="RequestResponse" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="CreditCheckService" entity-id="HTTP#1">
+                <graphicalData height="279" width="117" y="144" x="19"/>
+                <properties>
+                    <property value="${http.port}" name="port"/>
+                    <property value="localhost" name="host"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="httpLabel"/>
+                    <property name="transformer-refs"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property value="CreditCheckService" name="path"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method"/>
+                    <property name="user"/>
+                    <property value="2" name="auxiliary;index"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="Proxy service" entity-id="SOAP#1">
+                <graphicalData height="279" width="85" y="144" x="196"/>
+                <properties>
+                    <property value="CreditCheckPort" name="port"/>
+                    <property value="service/CreditCheckService.wsdl" name="wsdlLocation"/>
+                    <property name="serviceClass"/>
+                    <property value="http://www.mulesoft.org/schema/mule/cxf/proxy-service" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property value="body" name="payload"/>
+                    <property name="configuration-ref"/>
+                    <property value="http://www.credit-check.com/service" name="namespace"/>
+                    <property name="validationEnabled"/>
+                    <property name="bindingId"/>
+                    <property name="onException"/>
+                    <property value="CreditCheckService" name="service"/>
+                    <property name="mtomEnabled"/>
+                    <property name="enableMuleSoapHeaders"/>
+                    <property name="soapVersion"/>
+                    <property value="3" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <unknown index="4" description="false" entity-id="unknown#1">
+                <graphicalData height="61" width="202" y="147" x="341"/>
+                <content>&lt;mulexml:dom-to-xml-transformer xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot;/&gt;</content>
+            </unknown>
+            <splitter index="6" type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="Choice#1">
+                <graphicalData height="287" width="294" y="34" x="731"/>
+                <properties>
+                    <property value="6" name=";INDEX"/>
+                    <property-collection name="daa7d1b3-061a-4cbe-8810-c08265dbf010">
+                        <property value="true" name="choice.otherwise"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="f8051444-8bbd-4504-9cde-14008f85d450">
+                        <property value="#[xpath('/soapenv:Envelope/soapenv:Body/cred:CreditCheckRequest/nationalId/text()').text != 'Nial Darbey']" name="choice.expression"/>
+                        <property-collection name="choice.attributes">
+                            <property value="#[xpath('/soapenv:Envelope/soapenv:Body/cred:CreditCheckRequest/nationalId/text()').text != 'Nial Darbey']" name="expression"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="Choice#2">
+                    <properties>
+                        <property value="6" name=";INDEX"/>
+                        <property-collection name="daa7d1b3-061a-4cbe-8810-c08265dbf010">
+                            <property value="true" name="choice.otherwise"/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
+                        <property-collection name="f8051444-8bbd-4504-9cde-14008f85d450">
+                            <property value="#[xpath('/soapenv:Envelope/soapenv:Body/cred:CreditCheckRequest/nationalId/text()').text != 'Nial Darbey']" name="choice.expression"/>
+                            <property-collection name="choice.attributes">
+<property value="#[xpath('/soapenv:Envelope/soapenv:Body/cred:CreditCheckRequest/nationalId/text()').text != 'Nial Darbey']" name="expression"/>
+                            </property-collection>
+                        </property-collection>
+                    </properties>
+                </pattern>
+                <compartment entity-id="compartment#1">
+                    <lane isChoiceOtherwiseLane="false" index="8" hadOnlyOneElement="false" entity-id="f8051444-8bbd-4504-9cde-14008f85d450">
+                        <scope type="http://www.mulesoft.org/schema/mule/core/processor-chain" name="OK" entity-id="Processor Chain#1">
+                            <graphicalData height="0" width="0" y="0" x="0"/>
+                            <properties>
+<property name="updated"/>
+<property value="8" name="auxiliary;index"/>
+                            </properties>
+                            <description></description>
+                            <compartment entity-id="compartment#2">
+<lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="OK" entity-id="f78a50c9-ee59-4543-a658-69751adeb5ab">
+        <graphicalData height="67" width="68" y="75" x="891"/>
+        <properties>
+            <property name="updated"/>
+            <property value="OK" name="value"/>
+        </properties>
+        <description></description>
+    </pattern>
+</lane>
+                            </compartment>
+                        </scope>
+                    </lane>
+                    <lane isChoiceOtherwiseLane="true" index="11" hadOnlyOneElement="false" entity-id="daa7d1b3-061a-4cbe-8810-c08265dbf010">
+                        <scope type="http://www.mulesoft.org/schema/mule/core/processor-chain" name="RECHAZADO" entity-id="Processor Chain#2">
+                            <graphicalData height="0" width="0" y="0" x="0"/>
+                            <properties>
+<property name="updated"/>
+<property value="11" name="auxiliary;index"/>
+                            </properties>
+                            <description></description>
+                            <compartment entity-id="compartment#3">
+<lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#3">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="RECHAZADO" entity-id="a8663848-eaa9-4fed-ad83-21b6c8dc2651">
+        <graphicalData height="67" width="82" y="212" x="899"/>
+        <properties>
+            <property name="updated"/>
+            <property value="RECHAZADO" name="value"/>
+        </properties>
+        <description></description>
+    </pattern>
+</lane>
+                            </compartment>
+                        </scope>
+                    </lane>
+                </compartment>
+            </splitter>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/parse-template" name="Response" entity-id="d7de1ab9-5436-4b7d-b21c-3f87fda9cf35">
+                <graphicalData height="67" width="68" y="144" x="1085"/>
+                <properties>
+                    <property value="credit-check-template-response.txt" name="location"/>
+                    <property name="updated"/>
+                </properties>
+                <description></description>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

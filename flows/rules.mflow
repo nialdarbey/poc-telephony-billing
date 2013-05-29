@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="rules">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="DataMapper" entity-id="DataMapper#1">
+        <properties>
+            <property value="resultset_to_beans_grf" name="name"/>
+            <property value="1" name="auxiliary;index"/>
+            <property value="resultset_to_beans.grf" name="transformationGraphPath"/>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="credit-check" entity-id="ae5ba806-c8e9-4682-b7d7-67d57e47fb6f">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="2" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#1">
+            <graphicalData height="0" width="0" y="0" x="0"/>
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/quartz/endpoint" name="Cada 30 segundos" entity-id="Quartz#1">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name="businessEventsLabel"/>
+                    <property name="repeatCount"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="check" name="jobName"/>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property value="600000" name="repeatInterval"/>
+                    <property name="address"/>
+                    <property name="startDelay"/>
+                    <property name="encoding"/>
+                    <property name="cronExpression"/>
+                    <property name="mimeType"/>
+                    <property value="3" name="auxiliary;index"/>
+                    <property value="10000" name="responseTimeout"/>
+                    <property name="connector-ref"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/event-generator-job;0">
+                        <property value="check" name="groupName"/>
+                        <property value="check" name="jobGroupName"/>
+                        <property value="4" name="auxiliary;index"/>
+                        <property value="4" name="auxiliary;wrapIn"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/quartz/payload;1">
+                            <property value="Check" name="text"/>
+                            <property value="5" name="auxiliary;index"/>
+                            <property value="5" name="auxiliary;wrapIn"/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+            </endpoint>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Select from Call History" entity-id="Database#1">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name=""/>
+                    <property name="businessEventsLabel"/>
+                    <property name="pollingFrequency"/>
+                    <property value="-1" name="queryTimeout"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="select" name="queryKey"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property value="6" name="auxiliary;index"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property value="Database" name="connector-ref"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
+                        <property value="select h.cliente_id, h.mins, h.date, h.time from telephony.call_history h" name="value"/>
+                        <property value="select" name="key"/>
+                        <property value="7" name="auxiliary;index"/>
+                        <property value="7" name="auxiliary;wrapIn"/>
+                    </property-collection>
+                </properties>
+            </endpoint>
+            <scope type="http://www.mulesoft.org/schema/mule/core/foreach" name="For Each Record" entity-id="For Each#1">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name="counterVariableName"/>
+                    <property name="rootMessageVariableName"/>
+                    <property name="batchSize"/>
+                    <property name="collection"/>
+                    <property value="8" name="auxiliary;index"/>
+                </properties>
+                <compartment entity-id="compartment#1">
+                    <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
+                        <pattern type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" name="ResultSet to Beans" entity-id="DataMapper#2">
+                            <graphicalData height="67" width="112" y="82" x="405"/>
+                            <properties>
+<property name="returnClass"/>
+<property name="stream"/>
+<property name="input-ref"/>
+<property value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+<property name="pipeSize"/>
+<property value="resultset_to_beans_grf" name="config-ref"/>
+<property value="9" name="auxiliary;index"/>
+                            </properties>
+                        </pattern>
+                        <unknown index="11" description="false" entity-id="unknown#1">
+                            <graphicalData height="61" width="68" y="85" x="705"/>
+                            <content>&lt;bpm:rules xmlns:bpm=&quot;http://www.mulesoft.org/schema/mule/bpm&quot; rulesDefinition=&quot;rules.drl&quot; initialFacts-ref=&quot;NoFactsBean&quot;/&gt;</content>
+                        </unknown>
+                    </lane>
+                </compartment>
+            </scope>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="red-alert" entity-id="4ecc5943-6d6f-4b92-81b9-4412d4c3b362">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="12" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#3">
+            <graphicalData height="0" width="0" y="0" x="0"/>
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="red-alert" entity-id="VM#1">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name="businessEventsLabel"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="address"/>
+                    <property value="red-alert" name="path"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property value="13" name="auxiliary;index"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Log minutes" entity-id="Logger#2">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property value="#[payload.minutes] minutes on a Call History entry" name="message"/>
+                    <property name="category"/>
+                    <property value="INFO" name="level"/>
+                    <property value="14" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Update Credit Check" entity-id="Database#2">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name=""/>
+                    <property name="businessEventsLabel"/>
+                    <property name="pollingFrequency"/>
+                    <property value="-1" name="queryTimeout"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="update" name="queryKey"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property value="15" name="auxiliary;index"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property value="Database" name="connector-ref"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
+                        <property value="update telephony.credit_check cc set cc.flag = 'RED' where cc.cliente_id = #[payload.clientId]" name="value"/>
+                        <property value="update" name="key"/>
+                        <property value="16" name="auxiliary;index"/>
+                        <property value="16" name="auxiliary;wrapIn"/>
+                    </property-collection>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

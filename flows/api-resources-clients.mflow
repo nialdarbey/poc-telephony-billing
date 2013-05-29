@@ -62,19 +62,48 @@
             </property-collection>
         </properties>
     </global-element>
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="Bean" entity-id="Bean#2">
+        <properties>
+            <property name="factory-bean"/>
+            <property name="abstract"/>
+            <property name="scope"/>
+            <property name="init-method"/>
+            <property name="autowire-candidate"/>
+            <property name="factory-method"/>
+            <property value="java.util.ArrayList" name="class"/>
+            <property name="parent"/>
+            <property name="children"/>
+            <property name="lazy-init"/>
+            <property value="beans@spring@http://www.springframework.org/schema/beans" name="auxiliary;wrappedIn"/>
+            <property name="id"/>
+            <property name="primary"/>
+            <property value="NoFactsBean" name="name"/>
+            <property name="autowire"/>
+            <property name="destroy-method"/>
+            <property value="7" name="auxiliary;index"/>
+            <property value="4" name="auxiliary;wrapIn"/>
+            <property name="depends-on"/>
+        </properties>
+    </global-element>
     <global-element type="http://www.mulesoft.org/schema/mule/core/configuration" name="Configuration" entity-id="Configuration#1">
         <properties>
             <property name="defaultExceptionStrategy-ref"/>
-            <property value="7" name="auxiliary;index"/>
+            <property value="8" name="auxiliary;index"/>
         </properties>
     </global-element>
-    <flow SubFlow="false" name="buscaClientes" entity-id="7ee5bc8e-1b69-4a05-9199-b62a5661d4f5">
+    <global-unknown index="11" description="false" entity-id="global-unknown#2">
+        <content>&lt;mulexml:namespace-manager xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot; includeConfigNamespaces=&quot;true&quot;&gt;
+		&lt;mulexml:namespace prefix=&quot;cred&quot; uri=&quot;http://www.credit-check.com/message/1.0&quot;/&gt;
+		&lt;mulexml:namespace prefix=&quot;soapenv&quot; uri=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;/&gt;
+	&lt;/mulexml:namespace-manager&gt;</content>
+    </global-unknown>
+    <flow SubFlow="false" name="buscaClientes" entity-id="5f0085db-3932-446e-a14b-0b8d11f25feb">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-            <property value="10" name="auxiliary;index"/>
+            <property value="14" name="auxiliary;index"/>
         </properties>
         <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#1">
             <graphicalData height="0" width="0" y="0" x="0"/>
@@ -84,10 +113,10 @@
                     <property name="message"/>
                     <property name="category"/>
                     <property value="INFO" name="level"/>
-                    <property value="11" name="auxiliary;index"/>
+                    <property value="15" name="auxiliary;index"/>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Database" entity-id="Database#2">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Select from clientes" entity-id="Database#2">
                 <graphicalData height="0" width="0" y="0" x="0"/>
                 <properties>
                     <property name=""/>
@@ -103,27 +132,27 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property value="12" name="auxiliary;index"/>
+                    <property value="16" name="auxiliary;index"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property value="Database" name="connector-ref"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                         <property value="select c.id, c.name from telephony.clientes c" name="value"/>
                         <property value="select" name="key"/>
-                        <property value="13" name="auxiliary;index"/>
-                        <property value="13" name="auxiliary;wrapIn"/>
+                        <property value="17" name="auxiliary;index"/>
+                        <property value="17" name="auxiliary;wrapIn"/>
                     </property-collection>
                 </properties>
             </endpoint>
         </lane>
     </flow>
-    <flow SubFlow="false" name="crearCliente" entity-id="45fffd0b-2e23-475a-9f4a-7ac7a6511f91">
+    <flow SubFlow="false" name="crearCliente" entity-id="7e7d57f9-d455-4a04-a09c-42cc933661eb">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-            <property value="14" name="auxiliary;index"/>
+            <property value="18" name="auxiliary;index"/>
         </properties>
         <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#2">
             <graphicalData height="0" width="0" y="0" x="0"/>
@@ -133,18 +162,18 @@
                     <property name="message"/>
                     <property name="category"/>
                     <property value="INFO" name="level"/>
-                    <property value="15" name="auxiliary;index"/>
+                    <property value="19" name="auxiliary;index"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="modificaCliente" entity-id="ea1681ea-99ee-472a-af48-9ad30a8d0c72">
+    <flow SubFlow="false" name="modificaCliente" entity-id="4c29e944-ebc1-49c3-8a7f-46c5aced4fbf">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-            <property value="16" name="auxiliary;index"/>
+            <property value="20" name="auxiliary;index"/>
         </properties>
         <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#3">
             <graphicalData height="0" width="0" y="0" x="0"/>
@@ -154,18 +183,18 @@
                     <property name="message"/>
                     <property name="category"/>
                     <property value="INFO" name="level"/>
-                    <property value="17" name="auxiliary;index"/>
+                    <property value="21" name="auxiliary;index"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="buscaCliente" entity-id="42ed9a4f-fb5e-4dae-8aca-3e976d923e83">
+    <flow SubFlow="false" name="buscaCliente" entity-id="f97587ea-f4a0-4d84-b7c0-6f4085ef0e13">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-            <property value="18" name="auxiliary;index"/>
+            <property value="22" name="auxiliary;index"/>
         </properties>
         <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#4">
             <graphicalData height="0" width="0" y="0" x="0"/>
@@ -175,10 +204,10 @@
                     <property name="message"/>
                     <property name="category"/>
                     <property value="INFO" name="level"/>
-                    <property value="19" name="auxiliary;index"/>
+                    <property value="23" name="auxiliary;index"/>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Database" entity-id="Database#3">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Select from clientes" entity-id="Database#3">
                 <graphicalData height="0" width="0" y="0" x="0"/>
                 <properties>
                     <property name=""/>
@@ -194,34 +223,34 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property value="20" name="auxiliary;index"/>
+                    <property value="24" name="auxiliary;index"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property value="Database" name="connector-ref"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                         <property value="select c.id, c.name from telephony.clientes c where c.id = #[cliente]" name="value"/>
                         <property value="select" name="key"/>
-                        <property value="21" name="auxiliary;index"/>
-                        <property value="21" name="auxiliary;wrapIn"/>
+                        <property value="25" name="auxiliary;index"/>
+                        <property value="25" name="auxiliary;wrapIn"/>
                     </property-collection>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="Set Payload" entity-id="Set Payload#1">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="First record" entity-id="Set Payload#1">
                 <graphicalData height="0" width="0" y="0" x="0"/>
                 <properties>
                     <property value="#[payload[0]]" name="value"/>
-                    <property value="22" name="auxiliary;index"/>
+                    <property value="26" name="auxiliary;index"/>
                 </properties>
             </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="buscaClientePlanes" entity-id="1cafd362-d756-4013-939e-9e4ec5421c39">
+    <flow SubFlow="false" name="buscaClientePlanes" entity-id="75e23a96-5866-4733-bf9d-c43f967113e3">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-            <property value="23" name="auxiliary;index"/>
+            <property value="27" name="auxiliary;index"/>
         </properties>
         <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#5">
             <graphicalData height="0" width="0" y="0" x="0"/>
@@ -231,59 +260,10 @@
                     <property name="message"/>
                     <property name="category"/>
                     <property value="INFO" name="level"/>
-                    <property value="24" name="auxiliary;index"/>
-                </properties>
-            </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Database" entity-id="Database#4">
-                <graphicalData height="0" width="0" y="0" x="0"/>
-                <properties>
-                    <property name=""/>
-                    <property name="businessEventsLabel"/>
-                    <property name="pollingFrequency"/>
-                    <property value="-1" name="queryTimeout"/>
-                    <property name="disableTransportTransformer"/>
-                    <property value="request-response" name="exchange-pattern"/>
-                    <property value="select" name="queryKey"/>
-                    <property name="tracking:enable-default-events"/>
-                    <property name="ref"/>
-                    <property name="transformer-refs"/>
-                    <property name="address"/>
-                    <property name="encoding"/>
-                    <property name="responseTransformer-refs"/>
-                    <property value="25" name="auxiliary;index"/>
-                    <property name="responseTimeout"/>
-                    <property name="mimeType"/>
-                    <property value="Database" name="connector-ref"/>
-                    <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
-                        <property value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name from telephony.plans p, telephony.clientes c, telephony.cliente_plans cp where p.id = cp.plan_id and c.id = cp.cliente_id and c.id =  #[cliente]" name="value"/>
-                        <property value="select" name="key"/>
-                        <property value="26" name="auxiliary;index"/>
-                        <property value="26" name="auxiliary;wrapIn"/>
-                    </property-collection>
-                </properties>
-            </endpoint>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="buscaClientePlan" entity-id="af7dd456-aade-435b-97be-06fd39ec5251">
-        <properties>
-            <property name="processingStrategy"/>
-            <property name="processingStrategy2"/>
-            <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
-            <property value="27" name="auxiliary;index"/>
-        </properties>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#6">
-            <graphicalData height="0" width="0" y="0" x="0"/>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#6">
-                <graphicalData height="0" width="0" y="0" x="0"/>
-                <properties>
-                    <property name="message"/>
-                    <property name="category"/>
-                    <property value="INFO" name="level"/>
                     <property value="28" name="auxiliary;index"/>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Database" entity-id="Database#5">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Select from planes" entity-id="Database#4">
                 <graphicalData height="0" width="0" y="0" x="0"/>
                 <properties>
                     <property name=""/>
@@ -304,84 +284,35 @@
                     <property name="mimeType"/>
                     <property value="Database" name="connector-ref"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
-                        <property value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name from telephony.plans p where p.id = #[cliente]" name="value"/>
+                        <property value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name from telephony.plans p, telephony.billings b, telephony.clientes c, telephony.cliente_plans cp where p.id = cp.plan_id and c.id = cp.cliente_id and c.id =  #[cliente] and b.id = p.billing_id" name="value"/>
                         <property value="select" name="key"/>
                         <property value="30" name="auxiliary;index"/>
                         <property value="30" name="auxiliary;wrapIn"/>
                     </property-collection>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="Set Payload" entity-id="Set Payload#2">
-                <graphicalData height="0" width="0" y="0" x="0"/>
-                <properties>
-                    <property value="#[payload[0]]" name="value"/>
-                    <property value="31" name="auxiliary;index"/>
-                </properties>
-            </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="modificaClientePlan" entity-id="acb02024-6412-4e06-8be5-3bb3950bebbf">
+    <flow SubFlow="false" name="buscaClientePlan" entity-id="6a70cbcf-d982-4579-beb8-03f7b555894f">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
             <property name="bussinessEventsLabel"/>
             <property name="tracking:enable-default-events"/>
-            <property value="32" name="auxiliary;index"/>
+            <property value="31" name="auxiliary;index"/>
         </properties>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#7">
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#6">
             <graphicalData height="0" width="0" y="0" x="0"/>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#7">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#6">
                 <graphicalData height="0" width="0" y="0" x="0"/>
                 <properties>
                     <property name="message"/>
                     <property name="category"/>
                     <property value="INFO" name="level"/>
-                    <property value="33" name="auxiliary;index"/>
+                    <property value="32" name="auxiliary;index"/>
                 </properties>
             </pattern>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="buscaClienteFactura" entity-id="eb52e3e0-3f18-4a9e-8553-2390fe6256f8">
-        <properties>
-            <property name="processingStrategy"/>
-            <property name="processingStrategy2"/>
-            <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
-            <property value="34" name="auxiliary;index"/>
-        </properties>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#8">
-            <graphicalData height="0" width="0" y="0" x="0"/>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#8">
-                <graphicalData height="0" width="0" y="0" x="0"/>
-                <properties>
-                    <property name="message"/>
-                    <property name="category"/>
-                    <property value="INFO" name="level"/>
-                    <property value="35" name="auxiliary;index"/>
-                </properties>
-            </pattern>
-        </lane>
-    </flow>
-    <flow SubFlow="false" name="buscaClienteOpciones" entity-id="c0955459-3e5d-4761-bf80-daea6028a7d7">
-        <properties>
-            <property name="processingStrategy"/>
-            <property name="processingStrategy2"/>
-            <property name="bussinessEventsLabel"/>
-            <property name="tracking:enable-default-events"/>
-            <property value="36" name="auxiliary;index"/>
-        </properties>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#9">
-            <graphicalData height="0" width="0" y="0" x="0"/>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#9">
-                <graphicalData height="0" width="0" y="0" x="0"/>
-                <properties>
-                    <property name="message"/>
-                    <property name="category"/>
-                    <property value="INFO" name="level"/>
-                    <property value="37" name="auxiliary;index"/>
-                </properties>
-            </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Database" entity-id="Database#6">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Select from planes" entity-id="Database#5">
                 <graphicalData height="0" width="0" y="0" x="0"/>
                 <properties>
                     <property name=""/>
@@ -397,21 +328,70 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property value="38" name="auxiliary;index"/>
+                    <property value="33" name="auxiliary;index"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property value="Database" name="connector-ref"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
-                        <property value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name as billing from telephony.plans p, telephony.billings b where not p.id in (select p.id from telephony.plans p, telephony.clientes c, telephony.cliente_plans cp where p.id = cp.plan_id and c.id = cp.cliente_id and c.id = #[cliente]) and b.id = p.billing_id" name="value"/>
+                        <property value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name from telephony.plans p, telephony.billings b where p.id = #[cliente] and b.id = p.billing_id" name="value"/>
                         <property value="select" name="key"/>
-                        <property value="39" name="auxiliary;index"/>
-                        <property value="39" name="auxiliary;wrapIn"/>
+                        <property value="34" name="auxiliary;index"/>
+                        <property value="34" name="auxiliary;wrapIn"/>
                     </property-collection>
                 </properties>
             </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="First record" entity-id="Set Payload#2">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property value="#[payload[0]]" name="value"/>
+                    <property value="35" name="auxiliary;index"/>
+                </properties>
+            </pattern>
         </lane>
     </flow>
-    <flow SubFlow="false" name="upgradeCliente" entity-id="e2558556-b903-4a4c-ab4b-634e22ab2eaa">
+    <flow SubFlow="false" name="modificaClientePlan" entity-id="ebfde207-9a52-46c8-9841-65577c14f29d">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="36" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#7">
+            <graphicalData height="0" width="0" y="0" x="0"/>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#7">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name="message"/>
+                    <property name="category"/>
+                    <property value="INFO" name="level"/>
+                    <property value="37" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="borraClientePlan" entity-id="156745a1-569a-4fc1-ae58-1034f9b8673d">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="38" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#8">
+            <graphicalData height="0" width="0" y="0" x="0"/>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#8">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name="message"/>
+                    <property name="category"/>
+                    <property value="INFO" name="level"/>
+                    <property value="39" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="buscaClienteFactura" entity-id="29c8d0f2-a030-423e-a6c3-19aff6cbfcd2">
         <properties>
             <property name="processingStrategy"/>
             <property name="processingStrategy2"/>
@@ -419,7 +399,77 @@
             <property name="tracking:enable-default-events"/>
             <property value="40" name="auxiliary;index"/>
         </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#9">
+            <graphicalData height="0" width="0" y="0" x="0"/>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#9">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name="message"/>
+                    <property name="category"/>
+                    <property value="INFO" name="level"/>
+                    <property value="41" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="buscaClienteOpciones" entity-id="bd04bf00-a87e-4328-8dfb-844dceed322a">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="42" name="auxiliary;index"/>
+        </properties>
         <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#10">
+            <graphicalData height="0" width="0" y="0" x="0"/>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#10">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name="message"/>
+                    <property name="category"/>
+                    <property value="INFO" name="level"/>
+                    <property value="43" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Select from planes" entity-id="Database#6">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name=""/>
+                    <property name="businessEventsLabel"/>
+                    <property name="pollingFrequency"/>
+                    <property value="-1" name="queryTimeout"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="select" name="queryKey"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property value="44" name="auxiliary;index"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property value="Database" name="connector-ref"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
+                        <property value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name as billing from telephony.plans p, telephony.billings b where not p.id in (select p.id from telephony.plans p, telephony.clientes c, telephony.cliente_plans cp where p.id = cp.plan_id and c.id = cp.cliente_id and c.id = #[cliente]) and b.id = p.billing_id" name="value"/>
+                        <property value="select" name="key"/>
+                        <property value="45" name="auxiliary;index"/>
+                        <property value="45" name="auxiliary;wrapIn"/>
+                    </property-collection>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="upgradeCliente" entity-id="354d149b-38df-4c13-b8d6-50144fa3ed2c">
+        <properties>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="46" name="auxiliary;index"/>
+        </properties>
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#11">
             <graphicalData height="0" width="0" y="0" x="0"/>
             <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Select Call History Records &gt; 177" entity-id="Database#7">
                 <graphicalData height="0" width="0" y="0" x="0"/>
@@ -437,42 +487,48 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property value="41" name="auxiliary;index"/>
+                    <property value="47" name="auxiliary;index"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property value="Database" name="connector-ref"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
-                        <property value="select count(*) as count from call_history where datediff(curdate(), date) &gt; 177" name="value"/>
+                        <property value="select count(*) as count from telephony.call_history h where datediff(curdate(), h.date) &gt; 177" name="value"/>
                         <property value="select" name="key"/>
-                        <property value="42" name="auxiliary;index"/>
-                        <property value="42" name="auxiliary;wrapIn"/>
+                        <property value="48" name="auxiliary;index"/>
+                        <property value="48" name="auxiliary;wrapIn"/>
                     </property-collection>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="First record" entity-id="Set Payload#3">
+            <pattern type="org.mule.tooling.ui.modules.core.filter.Expression" name="count = 0" entity-id="Expression#1">
                 <graphicalData height="0" width="0" y="0" x="0"/>
                 <properties>
-                    <property value="#[payload[0]]" name="value"/>
-                    <property value="43" name="auxiliary;index"/>
-                </properties>
-            </pattern>
-            <pattern type="org.mule.tooling.ui.modules.core.filter.Expression" name="payload &gt; 0" entity-id="Expression#1">
-                <graphicalData height="0" width="0" y="0" x="0"/>
-                <properties>
-                    <property value="#[payload &gt; 0]" name="expression"/>
+                    <property value="#[payload[0].count &gt; 0]" name="expression"/>
                     <property name="customEvaluator"/>
                     <property name="evaluator"/>
-                    <property value="44" name="auxiliary;index"/>
+                    <property value="49" name="auxiliary;index"/>
                     <property name="nullReturnsTrue"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Invocar Asociación Panameña de Crédito" entity-id="d4c70652-e7bc-44a1-abaf-e967a79594d7">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Invocar Asociación Panameña de Crédito" entity-id="Flow Reference#1">
                 <graphicalData height="0" width="0" y="0" x="0"/>
                 <properties>
-                    <property name="updated"/>
-                    <property value="" name="name"/>
+                    <property value="invocar-apc" name="name"/>
+                    <property value="50" name="auxiliary;index"/>
                 </properties>
-                <description></description>
+            </pattern>
+            <unknown index="51" description="false" entity-id="unknown#1">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <content>&lt;mulexml:dom-to-xml-transformer xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot;/&gt;</content>
+            </unknown>
+            <pattern type="org.mule.tooling.ui.modules.core.filter.Expression" name="Credit Check OK" entity-id="Expression#2">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property value="#[xpath('/soapenv:Envelope/soapenv:Body/cred:CreditCheckResponse/status/text()').text == 'OK']" name="expression"/>
+                    <property name="customEvaluator"/>
+                    <property name="evaluator"/>
+                    <property value="52" name="auxiliary;index"/>
+                    <property name="nullReturnsTrue"/>
+                </properties>
             </pattern>
             <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Select Credit Check Flag" entity-id="Database#8">
                 <graphicalData height="0" width="0" y="0" x="0"/>
@@ -490,95 +546,121 @@
                     <property name="address"/>
                     <property name="encoding"/>
                     <property name="responseTransformer-refs"/>
-                    <property value="45" name="auxiliary;index"/>
+                    <property value="53" name="auxiliary;index"/>
                     <property name="responseTimeout"/>
                     <property name="mimeType"/>
                     <property value="Database" name="connector-ref"/>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
                         <property value="select cc.flag from telephony.credit_check cc where cc.cliente_id = #[cliente]" name="value"/>
                         <property value="select" name="key"/>
-                        <property value="46" name="auxiliary;index"/>
-                        <property value="46" name="auxiliary;wrapIn"/>
+                        <property value="54" name="auxiliary;index"/>
+                        <property value="54" name="auxiliary;wrapIn"/>
                     </property-collection>
                 </properties>
             </endpoint>
-            <splitter index="47" type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="Choice#1">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#11">
                 <graphicalData height="0" width="0" y="0" x="0"/>
                 <properties>
-                    <property value="47" name=";INDEX"/>
-                    <property-collection name="6b0b0a2a-24bb-44b7-b6b4-c67c34120b06">
-                        <property value="#[payload[0].flag = 'GREEN']" name="choice.expression"/>
+                    <property value="#[payload]" name="message"/>
+                    <property name="category"/>
+                    <property value="INFO" name="level"/>
+                    <property value="55" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <splitter index="56" type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="Choice#1">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property-collection name="a064e9a0-3a0a-4aa3-9427-e68c5d69489f">
+                        <property value="#[payload[0].flag == 'RED']" name="choice.expression"/>
                         <property-collection name="choice.attributes">
-                            <property value="#[payload[0].flag = 'GREEN']" name="expression"/>
+                            <property value="#[payload[0].flag == 'RED']" name="expression"/>
                         </property-collection>
                     </property-collection>
-                    <property-collection name="6ca0340b-ece8-40f1-b6bb-30aeed3e2f12">
+                    <property-collection name="240be15f-96d6-4e3c-857f-d96b5b173c43">
+                        <property value="#[payload[0].flag == 'GREEN']" name="choice.expression"/>
+                        <property-collection name="choice.attributes">
+                            <property value="#[payload[0].flag == 'GREEN']" name="expression"/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="aa2bdb94-5093-4438-87a2-df9646b17d32">
                         <property value="true" name="choice.otherwise"/>
-                        <property-collection name="choice.attributes">
-                            <property value="#[payload[0].flag = 'AMBER']" name="expression"/>
-                        </property-collection>
-                    </property-collection>
-                    <property-collection name="fba29c67-d43c-451d-b42d-bba71254c9aa">
-                        <property value="#[payload[0].flag = 'RED']" name="choice.expression"/>
-                        <property-collection name="choice.attributes">
-                            <property value="#[payload[0].flag = 'RED']" name="expression"/>
-                        </property-collection>
+                        <property-collection name="choice.attributes"/>
                     </property-collection>
                 </properties>
-                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="Choice#2">
-                    <properties>
-                        <property value="47" name=";INDEX"/>
-                        <property-collection name="6b0b0a2a-24bb-44b7-b6b4-c67c34120b06">
-                            <property value="#[payload[0].flag = 'GREEN']" name="choice.expression"/>
-                            <property-collection name="choice.attributes">
-<property value="#[payload[0].flag = 'GREEN']" name="expression"/>
-                            </property-collection>
-                        </property-collection>
-                        <property-collection name="6ca0340b-ece8-40f1-b6bb-30aeed3e2f12">
-                            <property value="true" name="choice.otherwise"/>
-                            <property-collection name="choice.attributes">
-<property value="#[payload[0].flag = 'AMBER']" name="expression"/>
-                            </property-collection>
-                        </property-collection>
-                        <property-collection name="fba29c67-d43c-451d-b42d-bba71254c9aa">
-                            <property value="#[payload[0].flag = 'RED']" name="choice.expression"/>
-                            <property-collection name="choice.attributes">
-<property value="#[payload[0].flag = 'RED']" name="expression"/>
-                            </property-collection>
-                        </property-collection>
-                    </properties>
-                </pattern>
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="Choice#2"/>
                 <compartment entity-id="compartment#1">
-                    <lane isChoiceOtherwiseLane="false" index="49" hadOnlyOneElement="false" entity-id="fba29c67-d43c-451d-b42d-bba71254c9aa">
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#10">
+                    <lane isChoiceOtherwiseLane="false" index="58" hadOnlyOneElement="false" entity-id="a064e9a0-3a0a-4aa3-9427-e68c5d69489f">
+                        <scope type="http://www.mulesoft.org/schema/mule/core/processor-chain" name="RED" entity-id="Processor Chain#1">
                             <graphicalData height="0" width="0" y="0" x="0"/>
                             <properties>
-<property name="message"/>
-<property name="category"/>
-<property value="INFO" name="level"/>
-<property value="49" name="auxiliary;index"/>
+<property value="58" name="auxiliary;index"/>
                             </properties>
-                        </pattern>
+                            <compartment entity-id="compartment#2">
+<lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#12">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="RECHAZADO" entity-id="Set Payload#3">
+        <graphicalData height="0" width="0" y="0" x="0"/>
+        <properties>
+            <property value="{ &quot;status&quot; : &quot;RECHAZADO&quot; }" name="value"/>
+            <property value="59" name="auxiliary;index"/>
+        </properties>
+    </pattern>
+</lane>
+                            </compartment>
+                        </scope>
                     </lane>
-                    <lane isChoiceOtherwiseLane="false" index="51" hadOnlyOneElement="false" entity-id="6b0b0a2a-24bb-44b7-b6b4-c67c34120b06">
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#11">
+                    <lane isChoiceOtherwiseLane="false" index="61" hadOnlyOneElement="false" entity-id="240be15f-96d6-4e3c-857f-d96b5b173c43">
+                        <scope type="http://www.mulesoft.org/schema/mule/core/processor-chain" name="GREEN" entity-id="Processor Chain#2">
                             <graphicalData height="0" width="0" y="0" x="0"/>
                             <properties>
-<property name="message"/>
-<property name="category"/>
-<property value="INFO" name="level"/>
-<property value="51" name="auxiliary;index"/>
+<property value="61" name="auxiliary;index"/>
                             </properties>
-                        </pattern>
+                            <compartment entity-id="compartment#3">
+<lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#13">
+    <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Insert Plan" entity-id="Database#9">
+        <graphicalData height="0" width="0" y="0" x="0"/>
+        <properties>
+            <property name=""/>
+            <property name="businessEventsLabel"/>
+            <property name="pollingFrequency"/>
+            <property value="-1" name="queryTimeout"/>
+            <property name="disableTransportTransformer"/>
+            <property value="one-way" name="exchange-pattern"/>
+            <property value="insert" name="queryKey"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="ref"/>
+            <property name="transformer-refs"/>
+            <property name="address"/>
+            <property name="encoding"/>
+            <property name="responseTransformer-refs"/>
+            <property value="62" name="auxiliary;index"/>
+            <property name="responseTimeout"/>
+            <property name="mimeType"/>
+            <property value="Database" name="connector-ref"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
+                <property value="insert into telephony.cliente_plans (cliente_id, plan_id) values (#[cliente], #[opcion])" name="value"/>
+                <property value="insert" name="key"/>
+                <property value="63" name="auxiliary;index"/>
+                <property value="63" name="auxiliary;wrapIn"/>
+            </property-collection>
+        </properties>
+    </endpoint>
+    <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="OK" entity-id="Set Payload#4">
+        <graphicalData height="0" width="0" y="0" x="0"/>
+        <properties>
+            <property value="{ &quot;status&quot; : &quot;OK&quot; }" name="value"/>
+            <property value="64" name="auxiliary;index"/>
+        </properties>
+    </pattern>
+</lane>
+                            </compartment>
+                        </scope>
                     </lane>
-                    <lane isChoiceOtherwiseLane="true" index="53" hadOnlyOneElement="false" entity-id="6ca0340b-ece8-40f1-b6bb-30aeed3e2f12">
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="Logger#12">
+                    <lane isChoiceOtherwiseLane="true" index="66" hadOnlyOneElement="false" entity-id="aa2bdb94-5093-4438-87a2-df9646b17d32">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/set-payload" name="PENDIENTE" entity-id="Set Payload#5">
                             <graphicalData height="0" width="0" y="0" x="0"/>
                             <properties>
-<property name="message"/>
-<property name="category"/>
-<property value="INFO" name="level"/>
-<property value="53" name="auxiliary;index"/>
+<property value="{ &quot;status&quot; : &quot;PENDIENTE&quot; }" name="value"/>
+<property value="66" name="auxiliary;index"/>
                             </properties>
                         </pattern>
                     </lane>
@@ -586,18 +668,96 @@
             </splitter>
         </lane>
     </flow>
-    <flow SubFlow="false" name="invocar-apc" entity-id="2557a6a4-21ff-4ac4-ac94-c03a6eceaffb">
+    <flow SubFlow="false" name="invocar-apc" entity-id="c803358e-4da3-4c25-8054-9eac6211462d">
         <properties>
-            <property name="updated"/>
-            <property value="" name="processingStrategy2"/>
-            <property value="" name="bussinessEventsLabel"/>
-            <property value="true" name="auxiliary;erased;processingStrategy2"/>
-            <property value="false" name="tracking:enable-default-events"/>
-            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/tracking/transaction;1969054937"/>
+            <property name="processingStrategy"/>
+            <property name="processingStrategy2"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property value="67" name="auxiliary;index"/>
         </properties>
-        <description></description>
-        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="ccb6baa9-a8b5-43d1-ba37-bf549db13f5c">
+        <lane isChoiceOtherwiseLane="false" index="0" hadOnlyOneElement="false" entity-id="compartment-lane#14">
             <graphicalData height="0" width="0" y="0" x="0"/>
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Select National Id" entity-id="Database#10">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name=""/>
+                    <property name="businessEventsLabel"/>
+                    <property name="pollingFrequency"/>
+                    <property value="-1" name="queryTimeout"/>
+                    <property name="disableTransportTransformer"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="select" name="queryKey"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="address"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property value="68" name="auxiliary;index"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property value="Database" name="connector-ref"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/ee/jdbc/query;0">
+                        <property value="select c.national_id from telephony.clientes c where c.id = #[cliente]" name="value"/>
+                        <property value="select" name="key"/>
+                        <property value="69" name="auxiliary;index"/>
+                        <property value="69" name="auxiliary;wrapIn"/>
+                    </property-collection>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/parse-template" name="Soap Envelope" entity-id="Parse Template#1">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property value="credit-check-template-request.txt" name="location"/>
+                    <property value="70" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="Proxy client" entity-id="SOAP#1">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property name="wsdlLocation"/>
+                    <property name="port"/>
+                    <property name="serviceClass"/>
+                    <property name="operation"/>
+                    <property value="http://www.mulesoft.org/schema/mule/cxf/proxy-client" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="mtomEnabled"/>
+                    <property value="body" name="payload"/>
+                    <property value="true" name="enableMuleSoapHeaders"/>
+                    <property name="configuration-ref"/>
+                    <property name="decoupledEndpoint"/>
+                    <property value="71" name="auxiliary;index"/>
+                </properties>
+            </pattern>
+            <endpoint message-exchange-pattern="RequestResponse" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="CreditCheckService" entity-id="HTTP#1">
+                <graphicalData height="0" width="0" y="0" x="0"/>
+                <properties>
+                    <property value="${http.port}" name="port"/>
+                    <property value="localhost" name="host"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
+                    <property value="CreditCheckService" name="path"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property value="POST" name="method"/>
+                    <property name="user"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property value="72" name="auxiliary;index"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
         </lane>
     </flow>
     <description></description>

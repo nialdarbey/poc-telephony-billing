@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+	xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd">
+    
+    
+    <flow name="APCService" doc:name="APCService" doc:description="Asociación Panameña de Crédito">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="${http.port}" doc:name="CreditCheckService" path="CreditCheckService"/>
+        <cxf:proxy-service doc:name="Proxy service" namespace="http://www.credit-check.com/service" payload="body" port="CreditCheckPort" service="CreditCheckService" wsdlLocation="service/CreditCheckService.wsdl"/>
+        <mulexml:dom-to-xml-transformer />
+        <choice doc:name="Choice">
+            <when expression="#[xpath('/soapenv:Envelope/soapenv:Body/cred:CreditCheckRequest/nationalId/text()').text != 'Nial Darbey']">
+                <processor-chain doc:name="OK">
+                    <set-payload value="OK" doc:name="OK"/>
+                </processor-chain>
+            </when>
+            <otherwise>
+                <processor-chain doc:name="RECHAZADO">
+                    <set-payload value="RECHAZADO" doc:name="RECHAZADO"/>
+                </processor-chain>
+            </otherwise>
+        </choice>
+        <parse-template location="credit-check-template-response.txt" doc:name="Response"/>
+      
+    </flow>
+
+    
+</mule>

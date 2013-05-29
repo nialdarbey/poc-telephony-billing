@@ -8,44 +8,47 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 
 	<flow name="buscaPlanes" doc:name="buscaPlanes">
 		<logger level="INFO" doc:name="Logger"/>
-		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Select planes" queryKey="select">
             <jdbc-ee:query key="select" value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name from telephony.plans p, telephony.billings b where p.billing_id = b.id and b.name = #[message.inboundProperties.billing]"/>
 		</jdbc-ee:outbound-endpoint>
 	</flow>
 
 	<flow name="buscaPlan" doc:name="buscaPlan">
 		<logger level="INFO" doc:name="Logger"/>
-		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Select planes" queryKey="select">
             <jdbc-ee:query key="select" value="select p.id, p.name, p.mensualidad, p.minutos_redes, p.minutos_net, p.data, p.sms, b.name from telephony.plans p, telephony.billings b where p.billing_id = b.id and p.id = #[plan]"/>
 		</jdbc-ee:outbound-endpoint>
+        <set-payload value="#[payload[0]]" doc:name="First record"/>
 	</flow>
 
 	<flow name="buscaFabricantes" doc:name="buscaFabricantes">
 		<logger level="INFO" doc:name="Logger"/>
-		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Select Fabricantes" queryKey="select">
             <jdbc-ee:query key="select" value="select f.id, f.name from telephony.fabricantes f"/>
 		</jdbc-ee:outbound-endpoint>
 	</flow>
 
 	<flow name="buscaFabricante" doc:name="buscaFabricante">
 		<logger level="INFO" doc:name="Logger"/>
-		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Select Fabricantes" queryKey="select">
             <jdbc-ee:query key="select" value="select f.id, f.name from telephony.fabricantes f where f.id = #[fabricante]"/>
 		</jdbc-ee:outbound-endpoint>
+        <set-payload value="#[payload[0]]" doc:name="First record"/>
 	</flow>
 
 	<flow name="buscaFabricanteEquipos" doc:name="buscaFabricanteEquipos">
 		<logger level="INFO" doc:name="Logger"/>
-		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Select Equipos" queryKey="select">
             <jdbc-ee:query key="select" value="select e.id, e.name, e.description from telephony.equipos e, telephony.fabricantes f where e.fabricante_id = f.id and f.id = #[fabricante]"/>
 		</jdbc-ee:outbound-endpoint>
 	</flow>
 
 	<flow name="buscaFabricanteEquipo" doc:name="buscaFabricanteEquipo">
 		<logger level="INFO" doc:name="Logger"/>
-		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Database" queryKey="select">
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryTimeout="-1" connector-ref="Database" doc:name="Select Equipos" queryKey="select">
             <jdbc-ee:query key="select" value="select e.id, e.name from telephony.equipos e where e.id = #[equipo]"/>
 		</jdbc-ee:outbound-endpoint>
+        <set-payload value="#[payload[0]]" doc:name="First record"/>
 	</flow>
 
 </mule>

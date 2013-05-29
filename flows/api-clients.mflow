@@ -16,9 +16,9 @@
 						&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
 					&lt;/retrieve&gt;
 					&lt;member idVariableName=&quot;plan&quot;&gt;
-						&lt;retrieve flow-ref=&quot;buscaClientePlan&quot; description=&quot;Busca los datos del Plan de Cliente&quot;&gt;
 							&lt;representation mediaType=&quot;application/json&quot; quality=&quot;1.0&quot;&gt;&lt;/representation&gt;
-						&lt;/retrieve&gt;
+						&lt;retrieve flow-ref=&quot;buscaClientePlan&quot; description=&quot;Busca los datos del Plan de Cliente&quot;&gt;&lt;/retrieve&gt;
+						&lt;delete flow-ref=&quot;borraClientePlan&quot; description=&quot;Borra el Plan de Cliente&quot;&gt;&lt;/delete&gt;
 					&lt;/member&gt;
 				&lt;/collection-resource&gt;
 				&lt;collection-resource name=&quot;opciones&quot; description=&quot;Upgrade Opciones&quot;&gt;
@@ -43,9 +43,9 @@
 		&lt;/collection-resource&gt;
 	&lt;/interface&gt;</content>
     </global-unknown>
-    <global-unknown index="27" parentIndex="0" unknownName="clientService" description="false" wrapNSURL="http://www.mulesoft.org/schema/mule/api-rest" wrapNSPref="" wrapIn="api" entity-id="global-unknown#2">
+    <global-unknown index="28" parentIndex="0" unknownName="clientService" description="false" wrapNSURL="http://www.mulesoft.org/schema/mule/api-rest" wrapNSPref="" wrapIn="api" entity-id="global-unknown#2">
         <content>&lt;service xmlns=&quot;http://www.mulesoft.org/schema/mule/api-rest&quot; xmlns:ee=&quot;http://www.mulesoft.org/schema/mule/ee/core&quot; name=&quot;clientService&quot; interface-ref=&quot;clientInterface&quot; description=&quot;service description&quot;&gt;
-		&lt;mule:inbound-endpoint xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; address=&quot;http://localhost:${http.port}/api/customers&quot;&gt;&lt;/mule:inbound-endpoint&gt;
+		&lt;mule:inbound-endpoint xmlns:mule=&quot;http://www.mulesoft.org/schema/mule/core&quot; address=&quot;http://localhost:${http.port}/customer/api&quot;&gt;&lt;/mule:inbound-endpoint&gt;
 		&lt;swagger-documentation enableConsole=&quot;true&quot; consolePath=&quot;console&quot;&gt;&lt;/swagger-documentation&gt;
 	&lt;/service&gt;</content>
     </global-unknown>
